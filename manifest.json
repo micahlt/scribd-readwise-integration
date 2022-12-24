@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Scribd Readwise Integration",
+  "description": "Export Scribd highlights into Readwise",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["*://*.readwise.io/*", "*://*.scribd.com/*"],
+  "permissions": ["cookies", "scripting", "tabs"],
+  "web_accessible_resources": [
+    {
+      "resources": ["export.js"],
+      "matches": ["*://*.scribd.com/*"]
+    }
+  ],
+  "externally_connectable": {
+    "matches": ["*://*.scribd.com/*"]
+  }
+}
