@@ -21,7 +21,7 @@ setTimeout(() => {
         });
       }
     });
-    chrome.runtime.sendMessage("pfdbgllacplaffkickmhedcghpimjmkd", {
+    chrome.runtime.sendMessage("ilpnpfninhcmhcnnecbaefciaaenkefo", {
       type: "finished-export",
       content: notes,
     });
