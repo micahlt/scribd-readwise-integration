@@ -11,7 +11,7 @@
     "service_worker": "background.js"
   },
   "host_permissions": ["*://*.readwise.io/*", "*://*.scribd.com/*"],
-  "permissions": ["cookies", "scripting", "tabs"],
+  "permissions": ["cookies", "scripting"],
   "web_accessible_resources": [
     {
       "resources": ["export.js"],
