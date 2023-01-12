@@ -25,32 +25,35 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 
 chrome.runtime.onMessageExternal.addListener(function (request, sender) {
   if (request.content) {
-    chrome.cookies.getAll(
-      {
-        domain: "readwise.io",
-      },
-      async (cookies) => {
-        const access_token = cookies.filter((c) => c.name == "accessToken")[0]
-          ?.value;
-        if (!access_token) {
-          return;
-        }
-        fetch(`https://readwise.io/api/v2/highlights/`, {
-          method: "POST",
-          headers: {
-            Authorization: `Token ${access_token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(request.content),
-        }).then((res) => {
-          if (res.ok) {
-            console.log("Okay!");
-            chrome.tabs.create({
-              url: "https://readwise.io/dashboard",
-            });
+    fetch("https://readwise.io/welcome/sync").then(() => {
+      chrome.cookies.getAll(
+        {
+          domain: "readwise.io",
+        },
+        async (cookies) => {
+          console.log(cookies);
+          const access_token = cookies.filter((c) => c.name == "accessToken")[0]
+            ?.value;
+          if (!access_token) {
+            return;
           }
-        });
-      }
-    );
+          fetch(`https://readwise.io/api/v2/highlights/`, {
+            method: "POST",
+            headers: {
+              Authorization: `Token ${access_token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(request.content),
+          }).then((res) => {
+            if (res.ok) {
+              console.log("Okay!");
+              chrome.tabs.create({
+                url: "https://readwise.io/dashboard",
+              });
+            }
+          });
+        }
+      );
+    });
   }
 });
