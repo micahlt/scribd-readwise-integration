@@ -1,31 +1,9 @@
 let access_token = "";
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  if (message == "export") {
-    sendResponse("ok");
-
-    async function getTab() {
-      let queryOptions = { active: true, currentWindow: true };
-      let tabs = await chrome.tabs.query(queryOptions);
-      return tabs[0].id;
-    }
-    const tabId = await getTab();
-    chrome.scripting.executeScript(
-      {
-        target: { tabId: tabId },
-        files: ["content.js"],
-      },
-      () => {
-        console.log("executed");
-      }
-    );
-  } else {
-    sendResponse("err");
-  }
-});
-
-chrome.runtime.onMessageExternal.addListener(function (request, sender) {
+const handleFinishRequest = (request) => {
   if (request.content) {
-    fetch("https://readwise.io/welcome/sync").then(() => {
+    fetch("https://readwise.io/welcome/sync", {
+      method: "GET",
+    }).then(() => {
       chrome.cookies.getAll(
         {
           domain: "readwise.io",
@@ -55,5 +33,28 @@ chrome.runtime.onMessageExternal.addListener(function (request, sender) {
         }
       );
     });
+  }
+};
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  if (message == "export") {
+    sendResponse("ok");
+
+    async function getTab() {
+      let queryOptions = { active: true, currentWindow: true };
+      let tabs = await chrome.tabs.query(queryOptions);
+      return tabs[0].id;
+    }
+    const tabId = await getTab();
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: tabId },
+        files: ["content.js"],
+      },
+      () => {
+        console.log("executed");
+      }
+    );
+  } else {
+    handleFinishRequest(message);
   }
 });

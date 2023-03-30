@@ -5,8 +5,8 @@
 
 html,
 body {
-  height: 80px;
-  width: 250px;
+  height: 100px;
+  width: 270px;
 }
 
 body {
@@ -15,6 +15,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   background-color: #191928;
 }
 
@@ -32,4 +33,14 @@ button {
 
 button:hover {
   background-color: #373761;
+}
+
+p {
+  margin-top: 0.5rem;
+  color: #ffffffab;
+  font-size: 0.9em;
+}
+
+a {
+  color: white;
 }
