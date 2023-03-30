@@ -7,7 +7,6 @@
     "default_popup": "popup/popup.html",
     "default_icon": "icon.png"
   },
-
   "browser_specific_settings": {
     "gecko": {
       "id": "scribdreadwise@micahlindley.com",

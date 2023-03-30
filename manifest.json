@@ -7,13 +7,6 @@
     "default_popup": "popup/popup.html",
     "default_icon": "icon.png"
   },
-
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "scribdreadwise@micahlindley.com",
-      "strict_min_version": "42.0"
-    }
-  },
   "background": {
     "service_worker": "background.js"
   },
