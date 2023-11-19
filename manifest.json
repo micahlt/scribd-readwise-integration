@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Scribd Readwise Integration",
-  "description": "Export Scribd highlights into Readwise",
-  "version": "1.2",
+  "description": "Export Scribd and Everand highlights into Readwise",
+  "version": "1.3",
   "action": {
     "default_popup": "popup/popup.html",
     "default_icon": "icon.png"
@@ -10,15 +10,19 @@
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": ["*://*.readwise.io/*", "*://*.scribd.com/*"],
+  "host_permissions": [
+    "*://*.readwise.io/*",
+    "*://*.scribd.com/*",
+    "*://*.everand.com/*"
+  ],
   "permissions": ["cookies", "scripting"],
   "web_accessible_resources": [
     {
       "resources": ["export.js"],
-      "matches": ["*://*.scribd.com/*"]
+      "matches": ["*://*.scribd.com/*", "*://*.everand.com/*"]
     }
   ],
   "externally_connectable": {
-    "matches": ["*://*.scribd.com/*"]
+    "matches": ["*://*.scribd.com/*", "*://*.everand.com/*"]
   }
 }
